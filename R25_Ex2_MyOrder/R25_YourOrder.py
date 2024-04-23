@@ -5,9 +5,8 @@ from tkinter import ttk
 import os
 from PIL import ImageTk, Image   
 
-
 window = tk.Tk()
-ta_commande = "Ta commande: \n"
+ta_commande= "Ta commande: \n"
 choix_smarin =  tk.StringVar(value="steak")
 size_smarin =  tk.StringVar(value="10")
 choix_pizza =  tk.StringVar(value="nature")
@@ -17,11 +16,38 @@ prix_total = 0
 
 #  VOIR ÉNONCÉ
 def ajouter_smarin():
-    pass
-
+    prix=0
+    choix = choix_smarin.get()
+    grandeur = size_smarin.get()
+    if grandeur=="10":
+        if choix=="duchef":
+            prix="15,99"
+        else:
+            prix="14,99"
+    else:
+        if choix=="duchef":
+            prix="17,99"
+        else:
+            prix="16,99"
+    global ta_commande 
+    ta_commande= ta_commande + f"Un sous-marin {choix} de {grandeur}po: {prix}$\n"
 #  VOIR ÉNONCÉ               
 def ajouter_pizza():
-    pass
+    prix=0
+    choix = choix_pizza.get()
+    grandeur = size_pizza.get()
+    if grandeur==7:
+        if choix=="Toute garnie":
+            prix="16,99"
+        else:
+            prix="14,99"
+    else:
+        if choix=="Toute garnie":
+            prix="18,99"
+        else:
+            prix="16,99"
+    global ta_commande
+    ta_commande=ta_commande + f"une pizza {choix} de {grandeur}po: {prix}$\n"
 
 #  VOIR ÉNONCÉ               
 def ajouter():
@@ -84,7 +110,7 @@ smarin14po = ttk.Radiobutton(frm_smarin_choix, text='14"', variable=size_smarin,
 smarin10po.grid(row=5, column=0,padx=2,pady=2,sticky="w")
 smarin14po.grid(row=6, column=0,padx=2,sticky="w")
 
-btn_voir_ajout_smarin = ttk.Button(frm_sousmarin, text="Ajouter")
+btn_voir_ajout_smarin = ttk.Button(frm_sousmarin, text="Ajouter",command=ajouter)
 btn_voir_ajout_smarin.grid(column=2, row=3, sticky='w') 
 
 
@@ -133,7 +159,7 @@ pizza14po = ttk.Radiobutton(frm_pizza_choix, text='14"', variable=size_pizza, va
 pizza7po.grid(row=5, column=0,padx=2,pady=2,sticky="w")
 pizza14po.grid(row=6, column=0,padx=2,sticky="w")
 
-btn_voir_ajout_pizza = ttk.Button(frm_pizza, text="Ajouter")
+btn_voir_ajout_pizza = ttk.Button(frm_pizza, text="Ajouter",command=ajouter)
 btn_voir_ajout_pizza.grid(column=2, row=3, sticky='w') 
 
 
