@@ -16,42 +16,54 @@ prix_total = 0
 
 #  VOIR ÉNONCÉ
 def ajouter_smarin():
-    prix=0
-    choix = choix_smarin.get()
-    grandeur = size_smarin.get()
-    if grandeur=="10":
-        if choix=="duchef":
-            prix="15,99"
+    if chk_smarin.get()==1:    
+        prix=0
+        choix = choix_smarin.get()
+        grandeur = size_smarin.get()
+        if grandeur=="10":
+            if choix=="duchef":
+                prix="15,99"
+            else:
+                prix="14,99"
         else:
-            prix="14,99"
-    else:
-        if choix=="duchef":
-            prix="17,99"
-        else:
-            prix="16,99"
-    global ta_commande 
-    ta_commande= ta_commande + f"Un sous-marin {choix} de {grandeur}po: {prix}$\n"
+            if choix=="duchef":
+                prix="17,99"
+            else:
+                prix="16,99"
+        global ta_commande 
+        ta_commande= ta_commande + f"Un sous-marin {choix} de {grandeur}po: {prix}$\n"
+        global prix_total
+        prix_total+=prix
 #  VOIR ÉNONCÉ               
 def ajouter_pizza():
-    prix=0
-    choix = choix_pizza.get()
-    grandeur = size_pizza.get()
-    if grandeur==7:
-        if choix=="Toute garnie":
-            prix="16,99"
+    if chk_pizza.get()==1:
+        prix=0
+        choix = choix_pizza.get()
+        grandeur = size_pizza.get()
+        if grandeur==7:
+            if choix=="Toute garnie":
+                prix="16,99"
+            else:
+                prix="14,99"
         else:
-            prix="14,99"
-    else:
-        if choix=="Toute garnie":
-            prix="18,99"
-        else:
-            prix="16,99"
-    global ta_commande
-    ta_commande=ta_commande + f"une pizza {choix} de {grandeur}po: {prix}$\n"
-
+            if choix=="Toute garnie":
+                prix="18,99"
+            else:
+                prix="16,99"
+        global ta_commande
+        ta_commande=ta_commande + f"une pizza {choix} de {grandeur}po: {prix}$\n"
+        global prix_total
+        prix_total+=prix
 #  VOIR ÉNONCÉ               
 def ajouter():
-    pass
+    ajouter_smarin()
+    ajouter_pizza()
+    global prix_total
+    global ta_commande
+    ta_commande=ta_commande + f"       pour un total de: {prix_total}$"
+    displayBox.delete("0.0","end")
+    displayBox.insert("0.0",ta_commande)
+
 
     
 window.rowconfigure((0,1,2,3), weight=1, minsize=150)
